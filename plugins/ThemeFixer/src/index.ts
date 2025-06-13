@@ -8,6 +8,7 @@ const ThemeStore = findByStoreName("ThemeStore");
 const canUse = findByProps("canUseClientThemes");
 const ThemeUtils = findByProps("updateBackgroundGradientPreset");
 const AppearanceSettings = findByProps("setShouldSyncAppearanceSettings");
+const UnsyncedUserSettingsStore = getModule((m) => m?.getName?.() === "UnsyncedUserSettingsStore");
 const ThemeManager = getByProps("overrideTheme");
 const AMOLEDTheme = getByProps("setAMOLEDThemeEnabled");
 
