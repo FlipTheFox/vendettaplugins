@@ -18,7 +18,12 @@ jobs:
               with:
                   node-version: "16"
 
+                  - name: Setup pnpm
+                    uses: pnpm/action-setup@v4.1.0
+
             - run: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+
+            
 
             - name: Install deps
               run: pnpm m i
