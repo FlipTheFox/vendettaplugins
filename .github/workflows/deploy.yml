@@ -11,8 +11,7 @@ jobs:
           contents: write
   
         steps:
-            - name: bruh
-              uses: actions/checkout@v3
+            - uses: actions/checkout@v3
 
              - name: Setup pnpm
         uses: pnpm/action-setup@v4.1.0
