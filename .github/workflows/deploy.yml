@@ -9,7 +9,10 @@ jobs:
         runs-on: ubuntu-latest
         permissions:
           contents: write
-
+          
+- name: Setup pnpm
+  uses: pnpm/action-setup@v4.1.0
+  
         steps:
             - uses: actions/checkout@v3
 
