@@ -18,7 +18,7 @@ jobs:
               with:
                   node-version: "16"
 
-            - run: npm install --global pnpm
+            - run: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 
             - name: Install deps
               run: pnpm m i
