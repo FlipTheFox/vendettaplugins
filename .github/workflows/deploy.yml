@@ -9,12 +9,9 @@ jobs:
         runs-on: ubuntu-latest
         permissions:
           contents: write
-  
+
         steps:
             - uses: actions/checkout@v3
-
-             - name: Setup pnpm
-        uses: pnpm/action-setup@v4.1.0
 
             - name: Prepare environment
               uses: actions/setup-node@v3
@@ -39,7 +36,6 @@ jobs:
                   printf -- "---\npermalink: /404.html\n---\n" > dist/404.md
                   printf -- "> **Note:** You accessed a link that returned a 404, probably by clicking one of the plugin links. You're supposed to copy the link address and add it into Vendetta.\n\n" >> dist/404.md
                   cat README.md >> dist/404.md
-
               # Documentation: https://github.com/peaceiris/actions-gh-pages
             - name: Deploy to GitHub Pages
               uses: peaceiris/actions-gh-pages@v3
