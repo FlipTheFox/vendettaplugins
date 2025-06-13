@@ -11,10 +11,10 @@ jobs:
           contents: write
   
         steps:
-        - name: Setup pnpm
-        uses: pnpm/action-setup@v4.1.0
-        
             - uses: actions/checkout@v3
+
+             - name: Setup pnpm
+        uses: pnpm/action-setup@v4.1.0
 
             - name: Prepare environment
               uses: actions/setup-node@v3
