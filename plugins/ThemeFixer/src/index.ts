@@ -11,9 +11,6 @@ const AppearanceSettings = findByProps("setShouldSyncAppearanceSettings");
 const ThemeManager = getByProps("overrideTheme");
 const AMOLEDTheme = getByProps("setAMOLEDThemeEnabled");
 
-const ThemeFixer: Plugin = {
-   ...manifest,
-
    onStart() {
       const overrideTheme = function () {
          try {
