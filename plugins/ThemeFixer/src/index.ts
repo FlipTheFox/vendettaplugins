@@ -1,4 +1,4 @@
-import { findByProps, findByStoreName } from "@vendetta/metro";
+import { findByProps, findByStoreName, getByProps } from "@vendetta/metro";
 import { instead } from "@vendetta/patcher";
 import { storage } from "@vendetta/plugin";
 import { getDiscordTheme } from "$/types";
@@ -8,10 +8,12 @@ const ThemeStore = findByStoreName("ThemeStore");
 const canUse = findByProps("canUseClientThemes");
 const ThemeUtils = findByProps("updateBackgroundGradientPreset");
 const AppearanceSettings = findByProps("setShouldSyncAppearanceSettings");
+const FluxDispatcher = window.enmity.modules.common.Dispatcher as any;
 const UnsyncedUserSettingsStore = getModule((m) => m?.getName?.() === "UnsyncedUserSettingsStore");
 const ThemeManager = getByProps("overrideTheme");
 const AMOLEDTheme = getByProps("setAMOLEDThemeEnabled");
 
+const plugin = {
    onStart() {
       const overrideTheme = function () {
          try {
@@ -28,3 +30,5 @@ const AMOLEDTheme = getByProps("setAMOLEDThemeEnabled");
 
    onStop() { }
 };
+
+export default plugin;
