@@ -21,7 +21,7 @@ jobs:
             - name: Setup pnpm
               uses: pnpm/action-setup@v4.1.0
               with:
-                   version: 10.11.1
+                   version: 8.15.3
 
             - run: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 
