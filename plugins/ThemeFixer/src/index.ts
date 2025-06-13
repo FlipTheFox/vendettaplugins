@@ -8,27 +8,25 @@ const ThemeStore = findByStoreName("ThemeStore");
 const canUse = findByProps("canUseClientThemes");
 const ThemeUtils = findByProps("updateBackgroundGradientPreset");
 const AppearanceSettings = findByProps("setShouldSyncAppearanceSettings");
+const ThemeManager = getByProps("overrideTheme");
+const AMOLEDTheme = getByProps("setAMOLEDThemeEnabled");
 
-// Apply patches
-const patches = [
-  instead(
-    "setShouldSyncAppearanceSettings",
-    AppearanceSettings,
-    () => false
-  ),
-];
+const ThemeFixer: Plugin = {
+   ...manifest,
 
-// Run side-effects separately
-AppearanceSettings.setShouldSyncAppearanceSettings(false);
+   onStart() {
+      const overrideTheme = function () {
+         try {
+            ThemeManager.overrideTheme(ThemeStore.theme ?? "dark");
+            AMOLEDTheme.setAMOLEDThemeEnabled(UnsyncedUserSettingsStore.useAMOLEDTheme === 2);
+            FluxDispatcher.unsubscribe("I18N_LOAD_SUCCESS", overrideTheme);
+         } catch (e) {
+            console.error("An error occurred while trying to override theme:\n" + e?.stack ?? e);
+         }
+      };
 
-// Attempt to force dark theme
-AppearanceSettings.setTheme?.("dark");
+      FluxDispatcher.subscribe("I18N_LOAD_SUCCESS", overrideTheme);
+   },
 
-// Apply saved gradient theme if available
-if (storage.theme && storage.isEnabled) {
-  ThemeUtils.updateBackgroundGradientPreset(storage.theme);
-}
-
-// Export theme-aware color resolver
-export const resolveCustomSemantic = (dark: string, light: string): string =>
-  getDiscordTheme() === "light" ? light : dark;
+   onStop() { }
+};
